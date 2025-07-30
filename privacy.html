@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,54 +5,504 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - RepTrack Pro</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #007AFF; }
-        h2 { color: #333; margin-top: 30px; }
-        .header { text-align: center; margin-bottom: 40px; }
-        .last-updated { color: #666; font-style: italic; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .app-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* App Icon Background */
+        .app-icon-bg {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.95));
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Circular Progress Ring */
+        .progress-ring {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: butt;
+            stroke-dasharray: 164; /* 2 * π * 26 (radius) */
+            stroke-dashoffset: 41; /* 75% progress (25% remaining) */
+        }
+
+        .progress-circle-bg {
+            stroke: url(#progressGradient);
+        }
+
+        /* Dumbbell Container */
+        .dumbbell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dumbbell-side {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+        }
+
+        .center-bar {
+            width: 10px;   /* Reduced from 12px */
+            height: 4px;   /* Reduced from 5px */
+            background: linear-gradient(to right, #3B82F6, #8B5CF6, #A855F7);
+            margin: 0 1px;
+            border-radius: 1px;
+        }
+
+        /* Weight Plates - Made even smaller */
+        .weight-plate {
+            border-radius: 1px; /* Rounded rectangle */
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Left side plates */
+        .plate-1 {
+            width: 3px;    /* Reduced from 4px */
+            height: 8px;   /* Reduced from 10px */
+            background: linear-gradient(to bottom, #06B6D4, rgba(6, 182, 212, 0.8));
+            box-shadow: 0 1px 2px rgba(6, 182, 212, 0.3);
+        }
+
+        .plate-2 {
+            width: 6px;    /* Reduced from 7px */
+            height: 18px;  /* Reduced from 22px */
+            background: linear-gradient(to bottom, rgb(77, 179, 255), rgba(77, 179, 255, 0.8));
+            box-shadow: 0 1px 2px rgba(77, 179, 255, 0.3);
+        }
+
+        .plate-3 {
+            width: 8px;    /* Reduced from 10px */
+            height: 24px;  /* Reduced from 30px */
+            background: linear-gradient(to bottom, #3B82F6, rgba(59, 130, 246, 0.8));
+            box-shadow: 0 1px 2px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Right side plates */
+        .plate-4 {
+            width: 8px;    /* Reduced from 10px */
+            height: 24px;  /* Reduced from 30px */
+            background: linear-gradient(to bottom, #A855F7, rgba(168, 85, 247, 0.8));
+            box-shadow: 0 1px 2px rgba(168, 85, 247, 0.3);
+        }
+
+        .plate-5 {
+            width: 6px;    /* Reduced from 7px */
+            height: 18px;  /* Reduced from 22px */
+            background: linear-gradient(to bottom, rgb(204, 102, 204), rgba(204, 102, 204, 0.8));
+            box-shadow: 0 1px 2px rgba(204, 102, 204, 0.3);
+        }
+
+        .plate-6 {
+            width: 3px;    /* Reduced from 4px */
+            height: 8px;   /* Reduced from 10px */
+            background: linear-gradient(to bottom, #FF00FF, rgba(255, 0, 255, 0.8));
+            box-shadow: 0 1px 2px rgba(255, 0, 255, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .last-updated {
+            background: rgba(79, 70, 229, 0.1);
+            color: #4F46E5;
+            padding: 15px 30px;
+            border-left: 4px solid #4F46E5;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-right: 15px;
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section p {
+            color: #4b5563;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .section li {
+            color: #4b5563;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section li::marker {
+            color: #4F46E5;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .footer {
+            background: #f8fafc;
+            padding: 30px;
+            text-align: center;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .privacy-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .last-updated {
+                padding: 15px 20px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Privacy Policy</h1>
-        <p><strong>RepTrack Pro</strong></p>
-        <p class="last-updated">Last updated: July 30, 2025</p>
+    <div class="container fade-in">
+        <header class="header">
+            <div class="app-logo">
+                <!-- App Icon Background -->
+                <div class="app-icon-bg"></div>
+                
+                <!-- Circular Progress Ring -->
+                <svg class="progress-ring" viewBox="0 0 56 56">
+                    <defs>
+                        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:rgba(6, 182, 212, 0.7);stop-opacity:1" />
+                            <stop offset="33%" style="stop-color:rgba(59, 130, 246, 0.7);stop-opacity:1" />
+                            <stop offset="66%" style="stop-color:rgba(168, 85, 247, 0.7);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgba(255, 0, 255, 0.7);stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle
+                        class="progress-circle progress-circle-bg"
+                        cx="28"
+                        cy="28"
+                        r="26"
+                    />
+                </svg>
+
+                <!-- Dumbbell -->
+                <div class="dumbbell">
+                    <!-- Left weights -->
+                    <div class="dumbbell-side">
+                        <div class="weight-plate plate-1"></div>
+                        <div class="weight-plate plate-2"></div>
+                        <div class="weight-plate plate-3"></div>
+                    </div>
+
+                    <!-- Center bar -->
+                    <div class="center-bar"></div>
+
+                    <!-- Right weights -->
+                    <div class="dumbbell-side">
+                        <div class="weight-plate plate-4"></div>
+                        <div class="weight-plate plate-5"></div>
+                        <div class="weight-plate plate-6"></div>
+                    </div>
+                </div>
+            </div>
+            <h1>RepTrack Pro</h1>
+            <p class="subtitle">Privacy Policy</p>
+        </header>
+
+        <div class="last-updated">
+            📅 Last updated: July 30, 2025
+        </div>
+
+        <main class="content">
+            <div class="highlight-box">
+                <p><strong>🔒 Your Privacy Matters:</strong> RepTrack Pro is designed with privacy at its core. All your workout data stays on your device, and we never collect or share your personal information without your explicit consent.</p>
+            </div>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">1</span>
+                    Information We Collect
+                </h2>
+                <p>RepTrack Pro operates on a privacy-first principle. The information we access includes:</p>
+                <ul>
+                    <li><strong>Workout Data:</strong> Exercise routines, sets, reps, weights, and workout duration</li>
+                    <li><strong>Health Metrics:</strong> Body weight, height, and fitness goals (stored locally)</li>
+                    <li><strong>Apple Health Data:</strong> Only with your explicit permission to read/write workout and health data</li>
+                    <li><strong>App Usage:</strong> Basic analytics to improve app performance (no personal data)</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">2</span>
+                    How We Use Your Information
+                </h2>
+                <p>Your data is used exclusively to enhance your fitness experience:</p>
+                <ul>
+                    <li>Track your workout progress and generate personal records</li>
+                    <li>Provide detailed analytics and insights about your fitness journey</li>
+                    <li>Sync workout data with Apple Health (only with your permission)</li>
+                    <li>Create personalized workout recommendations based on your history</li>
+                    <li>Generate progress reports and achievement milestones</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">3</span>
+                    Data Storage and Security
+                </h2>
+                <div class="highlight-box">
+                    <p><span class="privacy-icon">🛡️</span><strong>Local Storage:</strong> All your personal workout data is stored locally on your device using Apple's SwiftData framework.</p>
+                </div>
+                <ul>
+                    <li><strong>No Cloud Storage:</strong> We do not transmit your personal workout data to external servers</li>
+                    <li><strong>Device Security:</strong> Your data is protected by iOS security measures and device encryption</li>
+                    <li><strong>Data Isolation:</strong> Your information cannot be accessed by other apps without permission</li>
+                    <li><strong>Backup Protection:</strong> Data included in encrypted iOS backups only</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">4</span>
+                    Third-Party Integrations
+                </h2>
+                <p>RepTrack Pro integrates with the following services to enhance your experience:</p>
+                <ul>
+                    <li><strong>Apple HealthKit:</strong> Read and write workout data (requires explicit permission)</li>
+                    <li><strong>Apple Calendar:</strong> Schedule workout sessions (optional integration)</li>
+                    <li><strong>Crash Analytics:</strong> Anonymous crash reports to improve app stability</li>
+                </ul>
+                <p>All third-party integrations respect your privacy choices and Apple's privacy guidelines.</p>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">5</span>
+                    Your Privacy Rights
+                </h2>
+                <p>You have complete control over your data:</p>
+                <ul>
+                    <li><strong>Data Export:</strong> Export all your workout data in standard formats anytime</li>
+                    <li><strong>Data Deletion:</strong> Delete all data by uninstalling the app</li>
+                    <li><strong>Permission Control:</strong> Revoke HealthKit and other permissions in iOS Settings</li>
+                    <li><strong>Selective Sharing:</strong> Choose which data to share with Apple Health</li>
+                    <li><strong>Offline Mode:</strong> Use the app completely offline if preferred</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">6</span>
+                    Children's Privacy
+                </h2>
+                <p>RepTrack Pro is not intended for children under 13. We do not knowingly collect personal information from children under 13. If you believe we have collected information from a child under 13, please contact us immediately.</p>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">7</span>
+                    Changes to This Policy
+                </h2>
+                <p>We may update this privacy policy to reflect changes in our practices or for legal reasons. When we make changes:</p>
+                <ul>
+                    <li>We will update the "Last updated" date at the top of this policy</li>
+                    <li>Significant changes will be communicated through the app</li>
+                    <li>You will be prompted to review updated terms when necessary</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <div class="contact-info">
+                    <h3>Questions or Concerns?</h3>
+                    <p>We're here to help with any privacy-related questions.</p>
+                    <a href="mailto:privacy@reptrackpro.com">privacy@reptrackpro.com</a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2025 RepTrack Pro. Committed to protecting your privacy and data.</p>
+            <p>This policy is effective as of July 30, 2025</p>
+        </footer>
     </div>
 
-    <h2>1. Information We Collect</h2>
-    <p>RepTrack Pro collects and stores your workout data locally on your device. We may access your Apple Health data with your explicit permission to:</p>
-    <ul>
-        <li>Read workout and health data for insights and analytics</li>
-        <li>Write workout data to Apple Health to track your fitness progress</li>
-    </ul>
-
-    <h2>2. How We Use Your Information</h2>
-    <p>Your data is used solely to:</p>
-    <ul>
-        <li>Provide workout tracking and fitness analytics</li>
-        <li>Generate personal records and progress reports</li>
-        <li>Sync with Apple Health (with your permission)</li>
-    </ul>
-
-    <h2>3. Data Storage and Security</h2>
-    <p>All your workout data is stored locally on your device using SwiftData. We do not transmit your personal data to external servers. Your data is protected by iOS security measures.</p>
-
-    <h2>4. Third-Party Services</h2>
-    <p>We integrate with Apple HealthKit to provide enhanced fitness tracking. Apple Health data is governed by Apple's privacy policy.</p>
-
-    <h2>5. Your Rights</h2>
-    <p>You can:</p>
-    <ul>
-        <li>Export your data at any time through the app</li>
-        <li>Delete your data by uninstalling the app</li>
-        <li>Revoke HealthKit permissions in iOS Settings</li>
-    </ul>
-
-    <h2>6. Contact Us</h2>
-    <p>If you have questions about this privacy policy, please contact us at: support@reptrackpro.com</p>
-
-    <h2>7. Changes to This Policy</h2>
-    <p>We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page.</p>
+    <script>
+        // Simple fade-in animation for sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease-out';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
 </body>
 </html>
-```
