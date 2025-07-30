@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions - RepTrack Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .app-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* App Icon Background */
+        .app-icon-bg {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.95));
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Circular Progress Ring */
+        .progress-ring {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: butt;
+            stroke-dasharray: 164; /* 2 * π * 26 (radius) */
+            stroke-dashoffset: 41; /* 75% progress (25% remaining) */
+        }
+
+        .progress-circle-bg {
+            stroke: url(#progressGradient);
+        }
+
+        /* Dumbbell Container */
+        .dumbbell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dumbbell-side {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+        }
+
+        .center-bar {
+            width: 10px;   /* Reduced from 12px */
+            height: 4px;   /* Reduced from 5px */
+            background: linear-gradient(to right, #3B82F6, #8B5CF6, #A855F7);
+            margin: 0 1px;
+            border-radius: 1px;
+        }
+
+        /* Weight Plates - Made even smaller */
+        .weight-plate {
+            border-radius: 1px; /* Rounded rectangle */
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Left side plates */
+        .plate-1 {
+            width: 3px;    /* Reduced from 4px */
+            height: 8px;   /* Reduced from 10px */
+            background: linear-gradient(to bottom, #06B6D4, rgba(6, 182, 212, 0.8));
+            box-shadow: 0 1px 2px rgba(6, 182, 212, 0.3);
+        }
+
+        .plate-2 {
+            width: 6px;    /* Reduced from 7px */
+            height: 18px;  /* Reduced from 22px */
+            background: linear-gradient(to bottom, rgb(77, 179, 255), rgba(77, 179, 255, 0.8));
+            box-shadow: 0 1px 2px rgba(77, 179, 255, 0.3);
+        }
+
+        .plate-3 {
+            width: 8px;    /* Reduced from 10px */
+            height: 24px;  /* Reduced from 30px */
+            background: linear-gradient(to bottom, #3B82F6, rgba(59, 130, 246, 0.8));
+            box-shadow: 0 1px 2px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Right side plates */
+        .plate-4 {
+            width: 8px;    /* Reduced from 10px */
+            height: 24px;  /* Reduced from 30px */
+            background: linear-gradient(to bottom, #A855F7, rgba(168, 85, 247, 0.8));
+            box-shadow: 0 1px 2px rgba(168, 85, 247, 0.3);
+        }
+
+        .plate-5 {
+            width: 6px;    /* Reduced from 7px */
+            height: 18px;  /* Reduced from 22px */
+            background: linear-gradient(to bottom, rgb(204, 102, 204), rgba(204, 102, 204, 0.8));
+            box-shadow: 0 1px 2px rgba(204, 102, 204, 0.3);
+        }
+
+        .plate-6 {
+            width: 3px;    /* Reduced from 4px */
+            height: 8px;   /* Reduced from 10px */
+            background: linear-gradient(to bottom, #FF00FF, rgba(255, 0, 255, 0.8));
+            box-shadow: 0 1px 2px rgba(255, 0, 255, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .last-updated {
+            background: rgba(79, 70, 229, 0.1);
+            color: #4F46E5;
+            padding: 15px 30px;
+            border-left: 4px solid #4F46E5;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-right: 15px;
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section p {
+            color: #4b5563;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .section li {
+            color: #4b5563;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section li::marker {
+            color: #4F46E5;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .important-note {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(220, 38, 38, 0.05));
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .footer {
+            background: #f8fafc;
+            padding: 30px;
+            text-align: center;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .terms-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+
+        .legal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #f8fafc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .legal-table th,
+        .legal-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .legal-table th {
+            background: #4F46E5;
+            color: white;
+            font-weight: 600;
+        }
+
+        .legal-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .last-updated {
+                padding: 15px 20px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container fade-in">
+        <header class="header">
+            <div class="app-logo">
+                <!-- App Icon Background -->
+                <div class="app-icon-bg"></div>
+                
+                <!-- Circular Progress Ring -->
+                <svg class="progress-ring" viewBox="0 0 56 56">
+                    <defs>
+                        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:rgba(6, 182, 212, 0.7);stop-opacity:1" />
+                            <stop offset="33%" style="stop-color:rgba(59, 130, 246, 0.7);stop-opacity:1" />
+                            <stop offset="66%" style="stop-color:rgba(168, 85, 247, 0.7);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgba(255, 0, 255, 0.7);stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle
+                        class="progress-circle progress-circle-bg"
+                        cx="28"
+                        cy="28"
+                        r="26"
+                    />
+                </svg>
+
+                <!-- Dumbbell -->
+                <div class="dumbbell">
+                    <!-- Left weights -->
+                    <div class="dumbbell-side">
+                        <div class="weight-plate plate-1"></div>
+                        <div class="weight-plate plate-2"></div>
+                        <div class="weight-plate plate-3"></div>
+                    </div>
+
+                    <!-- Center bar -->
+                    <div class="center-bar"></div>
+
+                    <!-- Right weights -->
+                    <div class="dumbbell-side">
+                        <div class="weight-plate plate-4"></div>
+                        <div class="weight-plate plate-5"></div>
+                        <div class="weight-plate plate-6"></div>
+                    </div>
+                </div>
+            </div>
+            <h1>RepTrack Pro</h1>
+            <p class="subtitle">Terms and Conditions</p>
+        </header>
+
+        <div class="last-updated">
+            📋 Last updated: July 30, 2025
+        </div>
+
+        <main class="content">
+            <div class="highlight-box">
+                <p><strong>📱 Welcome to RepTrack Pro:</strong> By downloading and using our fitness tracking app, you agree to these terms and conditions. Please read them carefully as they govern your use of RepTrack Pro and its services.</p>
+            </div>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">1</span>
+                    Acceptance of Terms
+                </h2>
+                <p>By accessing and using RepTrack Pro ("the App"), you accept and agree to be bound by the terms and provision of this agreement.</p>
+                <ul>
+                    <li><strong>Agreement Scope:</strong> These terms apply to all users of RepTrack Pro</li>
+                    <li><strong>App Store Terms:</strong> Your use is also governed by the applicable App Store terms</li>
+                    <li><strong>Updates:</strong> We may modify these terms at any time with notice</li>
+                    <li><strong>Continued Use:</strong> Using the app after changes constitutes acceptance of new terms</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">2</span>
+                    License and Usage Rights
+                </h2>
+                <div class="highlight-box">
+                    <p><span class="terms-icon">📋</span><strong>Limited License:</strong> We grant you a limited, non-exclusive, non-transferable license to use RepTrack Pro for personal fitness tracking purposes.</p>
+                </div>
+                <p><strong>You May:</strong></p>
+                <ul>
+                    <li>Install and use RepTrack Pro on your personal devices</li>
+                    <li>Track your workouts, exercises, and fitness progress</li>
+                    <li>Export your personal workout data</li>
+                    <li>Use the app in accordance with these terms</li>
+                </ul>
+                <p><strong>You May Not:</strong></p>
+                <ul>
+                    <li>Reverse engineer, decompile, or disassemble the app</li>
+                    <li>Use the app for commercial purposes without permission</li>
+                    <li>Share your account with others</li>
+                    <li>Attempt to circumvent any security measures</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">3</span>
+                    User Responsibilities
+                </h2>
+                <p>As a user of RepTrack Pro, you are responsible for:</p>
+                <ul>
+                    <li><strong>Accurate Information:</strong> Providing accurate health and fitness data</li>
+                    <li><strong>Safe Usage:</strong> Using the app responsibly and consulting healthcare professionals when needed</li>
+                    <li><strong>Account Security:</strong> Maintaining the confidentiality of your account information</li>
+                    <li><strong>Compliance:</strong> Following all applicable laws and regulations</li>
+                    <li><strong>Content:</strong> Any content you create or share within the app</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">4</span>
+                    Health and Safety Disclaimer
+                </h2>
+                <div class="important-note">
+                    <p><strong>⚠️ Important Health Notice:</strong> RepTrack Pro is designed for fitness tracking and is not a substitute for professional medical advice, diagnosis, or treatment.</p>
+                </div>
+                <ul>
+                    <li><strong>Medical Consultation:</strong> Always consult with a healthcare provider before starting any exercise program</li>
+                    <li><strong>Personal Responsibility:</strong> You assume all risks associated with exercise and physical activity</li>
+                    <li><strong>Emergency Situations:</strong> In case of injury or medical emergency, seek immediate medical attention</li>
+                    <li><strong>Individual Results:</strong> Fitness results may vary based on individual circumstances</li>
+                    <li><strong>Limitations:</strong> The app does not monitor your physical condition during workouts</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">5</span>
+                    Data and Privacy
+                </h2>
+                <p>Your privacy is important to us. Our data practices include:</p>
+                <ul>
+                    <li><strong>Local Storage:</strong> Your workout data is stored locally on your device</li>
+                    <li><strong>Apple Health Integration:</strong> Data sharing with Apple Health requires your explicit consent</li>
+                    <li><strong>No Third-Party Sharing:</strong> We do not sell or share your personal data with third parties</li>
+                    <li><strong>Data Export:</strong> You can export your data at any time</li>
+                    <li><strong>Privacy Policy:</strong> See our separate Privacy Policy for detailed information</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">6</span>
+                    App Availability and Access
+                </h2>
+                <div class="highlight-box">
+                    <p><strong>📱 Free to Use:</strong> RepTrack Pro is currently available as a free application with full access to all features.</p>
+                </div>
+                <ul>
+                    <li><strong>No Cost:</strong> The app is provided free of charge with no subscription required</li>
+                    <li><strong>Full Features:</strong> All workout tracking, analytics, and export features are included</li>
+                    <li><strong>App Store Download:</strong> Available for download through the Apple App Store</li>
+                    <li><strong>Device Requirements:</strong> Compatible iOS devices and software versions as specified</li>
+                    <li><strong>Future Plans:</strong> We may introduce premium features or subscriptions in the future with notice</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">7</span>
+                    Intellectual Property
+                </h2>
+                <p>RepTrack Pro and its content are protected by intellectual property laws:</p>
+                <ul>
+                    <li><strong>Our Rights:</strong> We own all rights to the app, including code, design, and content</li>
+                    <li><strong>Your Content:</strong> You retain rights to your personal workout data and notes</li>
+                    <li><strong>Trademarks:</strong> RepTrack Pro name and logo are our trademarks</li>
+                    <li><strong>Third-Party Content:</strong> Some content may be licensed from third parties</li>
+                    <li><strong>Respect Rights:</strong> Do not infringe on our or others' intellectual property</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">8</span>
+                    App Updates and Modifications
+                </h2>
+                <p>We continuously improve RepTrack Pro through updates:</p>
+                <ul>
+                    <li><strong>Automatic Updates:</strong> The app may update automatically if enabled on your device</li>
+                    <li><strong>New Features:</strong> Updates may include new features, improvements, or bug fixes</li>
+                    <li><strong>Compatibility:</strong> Updates may require newer device versions</li>
+                    <li><strong>Discontinued Features:</strong> We may remove or modify features with notice</li>
+                    <li><strong>Required Updates:</strong> Some updates may be required for continued use</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">9</span>
+                    Limitation of Liability
+                </h2>
+                <div class="important-note">
+                    <p><strong>⚖️ Liability Limits:</strong> To the maximum extent permitted by law, RepTrack Pro and its developers shall not be liable for any indirect, incidental, special, consequential, or punitive damages.</p>
+                </div>
+                <ul>
+                    <li><strong>Use at Own Risk:</strong> You use the app at your own risk</li>
+                    <li><strong>No Warranties:</strong> The app is provided "as is" without warranties</li>
+                    <li><strong>Maximum Liability:</strong> Our total liability is limited to the amount you paid for the app</li>
+                    <li><strong>Exercise Injuries:</strong> We are not liable for injuries resulting from exercise</li>
+                    <li><strong>Data Loss:</strong> We are not responsible for loss of data or content</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">10</span>
+                    Termination
+                </h2>
+                <p>This agreement may be terminated under the following circumstances:</p>
+                <ul>
+                    <li><strong>By You:</strong> You may stop using the app and delete it from your devices at any time</li>
+                    <li><strong>By Us:</strong> We may terminate your access if you violate these terms</li>
+                    <li><strong>Automatic:</strong> Agreement terminates when you uninstall the app</li>
+                    <li><strong>Effect of Termination:</strong> Your license to use the app ends immediately</li>
+                    <li><strong>Surviving Provisions:</strong> Some sections survive termination (liability, intellectual property)</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">11</span>
+                    Governing Law and Disputes
+                </h2>
+                <p>Legal matters related to these terms:</p>
+                <ul>
+                    <li><strong>Governing Law:</strong> These terms are governed by the laws of [Your Jurisdiction]</li>
+                    <li><strong>Dispute Resolution:</strong> Disputes should first be resolved through direct communication</li>
+                    <li><strong>Arbitration:</strong> Certain disputes may be subject to binding arbitration</li>
+                    <li><strong>Class Actions:</strong> You waive the right to participate in class action lawsuits</li>
+                    <li><strong>Jurisdiction:</strong> Any legal proceedings must be brought in appropriate courts</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>
+                    <span class="section-number">12</span>
+                    Changes to Terms
+                </h2>
+                <p>We may update these terms from time to time:</p>
+                <ul>
+                    <li><strong>Notification:</strong> We will notify you of significant changes through the app</li>
+                    <li><strong>Effective Date:</strong> Changes become effective on the date specified</li>
+                    <li><strong>Continued Use:</strong> Using the app after changes means you accept the new terms</li>
+                    <li><strong>Disagreement:</strong> If you disagree with changes, you should stop using the app</li>
+                    <li><strong>Version Control:</strong> The current version is always available in the app</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <div class="contact-info">
+                    <h3>Questions About These Terms?</h3>
+                    <p>Contact us if you have any questions about these terms and conditions.</p>
+                    <a href="mailto:legal@reptrackpro.com">legal@reptrackpro.com</a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2025 RepTrack Pro. All rights reserved.</p>
+            <p>These terms are effective as of July 30, 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple fade-in animation for sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease-out';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
