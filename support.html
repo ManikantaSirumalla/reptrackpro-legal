@@ -12,21 +12,22 @@
         }
 
         :root {
-            /* App Theme Colors */
+            /* App Theme Colors - Exact match from AppTheme */
             --bg-primary: #000000;
-            --bg-secondary: #1e1e2e;
-            --bg-tertiary: #191923;
-            --card-bg-start: #2b2b2b;
-            --card-bg-end: #242424;
+            --bg-secondary: rgba(30, 30, 46, 1);
+            --bg-tertiary: rgba(25, 25, 35, 1);
+            --card-bg-start: rgba(43, 43, 43, 1);
+            --card-bg-end: rgba(36, 36, 36, 1);
             --text-primary: #ffffff;
             --text-secondary: #999999;
             --accent-primary: #007AFF;
-            --accent-secondary: #4DA6FF;
+            --accent-secondary: rgba(77, 166, 255, 1);
+            --accent-tertiary: rgba(51, 128, 230, 1);
             --success: #34C759;
             --warning: #FFCC00;
             --danger: #FF3B30;
-            --health: #7F66FF;
-            --progress: #CC9933;
+            --health: rgba(127, 102, 255, 1);
+            --progress: rgba(204, 153, 51, 1);
             
             /* Spacing */
             --spacing-xs: 4px;
@@ -45,6 +46,7 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+            background-attachment: fixed;
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
@@ -63,20 +65,45 @@
             margin-bottom: var(--spacing-xl);
         }
 
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 26px;
+            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--health) 100%);
+            padding: 8px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 22px;
+            object-fit: cover;
+        }
+
         .header h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--health) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.5px;
         }
 
         .header p {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
             margin-top: var(--spacing-md);
+            font-weight: 400;
         }
 
         /* Navigation */
@@ -142,8 +169,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
+            font-weight: 600;
             background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .card-title {
@@ -162,11 +193,13 @@
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
             margin-bottom: var(--spacing-lg);
             padding-bottom: var(--spacing-md);
-            border-bottom: 2px solid rgba(0, 122, 255, 0.3);
+            border-bottom: 2px solid rgba(0, 122, 255, 0.2);
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
         }
 
         /* Steps */
@@ -221,15 +254,15 @@
         }
 
         .badge-new {
-            background: rgba(52, 199, 89, 0.2);
+            background: rgba(52, 199, 89, 0.15);
             color: var(--success);
-            border: 1px solid rgba(52, 199, 89, 0.3);
+            border: 1px solid rgba(52, 199, 89, 0.25);
         }
 
         .badge-ai {
-            background: rgba(127, 102, 255, 0.2);
+            background: rgba(127, 102, 255, 0.15);
             color: var(--health);
-            border: 1px solid rgba(127, 102, 255, 0.3);
+            border: 1px solid rgba(127, 102, 255, 0.25);
         }
 
         /* Quick Links */
@@ -290,12 +323,21 @@
                 font-size: 2rem;
             }
 
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+
             .card {
                 padding: var(--spacing-md);
             }
 
             .nav-list {
                 flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
             }
         }
 
@@ -312,6 +354,9 @@
             font-weight: 600;
             color: var(--accent-primary);
             margin-bottom: var(--spacing-xs);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -319,6 +364,11 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="logo.png" alt="RepTrack Pro Logo" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #007AFF 0%, #4CB2FF 50%, #7F66FF 100%)'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:white;font-size:48px;font-weight:bold;\'>RP</div>';">
+                </div>
+            </div>
             <h1>RepTrack Pro</h1>
             <p>Your Ultimate Fitness Companion - Support & Features Guide</p>
         </div>
@@ -339,30 +389,30 @@
         <!-- Quick Links -->
         <div class="quick-links">
             <a href="#getting-started" class="quick-link">
-                <div class="quick-link-title">🚀 Getting Started</div>
+                <div class="quick-link-title">Getting Started</div>
                 <div class="quick-link-desc">New to RepTrack Pro? Start here</div>
             </a>
             <a href="#workout-tracking" class="quick-link">
-                <div class="quick-link-title">💪 Workout Tracking</div>
+                <div class="quick-link-title">Workout Tracking</div>
                 <div class="quick-link-desc">Track sets, reps, and weight</div>
             </a>
             <a href="#ai-plans" class="quick-link">
-                <div class="quick-link-title">🤖 AI Plans</div>
+                <div class="quick-link-title">AI Plans</div>
                 <div class="quick-link-desc">Generate personalized workouts</div>
             </a>
             <a href="#exercise-library" class="quick-link">
-                <div class="quick-link-title">📚 Exercise Library</div>
+                <div class="quick-link-title">Exercise Library</div>
                 <div class="quick-link-desc">Browse exercises and techniques</div>
             </a>
         </div>
 
         <!-- Getting Started -->
         <section id="getting-started" class="feature-section">
-            <h2 class="section-title">🚀 Getting Started</h2>
+            <h2 class="section-title">Getting Started</h2>
             
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">👤</div>
+                    <div class="card-icon">01</div>
                     <h3 class="card-title">Create Your Profile</h3>
                 </div>
                 <div class="card-content">
@@ -398,11 +448,11 @@
 
         <!-- Workout Tracking -->
         <section id="workout-tracking" class="feature-section">
-            <h2 class="section-title">💪 Workout Tracking</h2>
+            <h2 class="section-title">Workout Tracking</h2>
             
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">🏋️</div>
+                    <div class="card-icon">WT</div>
                     <h3 class="card-title">Start a Workout</h3>
                 </div>
                 <div class="card-content">
@@ -450,7 +500,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">⏱️</div>
+                    <div class="card-icon">RT</div>
                     <h3 class="card-title">Rest Timer Features</h3>
                 </div>
                 <div class="card-content">
@@ -473,13 +523,13 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">📊</div>
+                    <div class="card-icon">LA</div>
                     <h3 class="card-title">Live Activities <span class="badge badge-new">iOS 16+</span></h3>
                 </div>
                 <div class="card-content">
                     <p style="margin-bottom: var(--spacing-md);">On iPhone 14 Pro and later, your active workout appears on the Lock Screen and Dynamic Island for quick access without opening the app.</p>
                     <div class="highlight">
-                        <div class="highlight-title">How to Use:</div>
+                        <div class="highlight-title">How to Use</div>
                         <div>Simply start a workout and it will automatically appear on your Lock Screen. Swipe to see your current exercise, sets completed, and rest timer.</div>
                     </div>
                 </div>
@@ -488,11 +538,11 @@
 
         <!-- AI Plans -->
         <section id="ai-plans" class="feature-section">
-            <h2 class="section-title">🤖 AI-Powered Fitness Plans <span class="badge badge-ai">AI</span></h2>
+            <h2 class="section-title">AI-Powered Fitness Plans <span class="badge badge-ai">AI</span></h2>
             
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">🎯</div>
+                    <div class="card-icon">AI</div>
                     <h3 class="card-title">Generate Your First Plan</h3>
                 </div>
                 <div class="card-content">
@@ -545,7 +595,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">🔄</div>
+                    <div class="card-icon">RG</div>
                     <h3 class="card-title">Regenerating Plans</h3>
                 </div>
                 <div class="card-content">
@@ -571,7 +621,7 @@
                         </li>
                     </ol>
                     <div class="highlight" style="margin-top: var(--spacing-md);">
-                        <div class="highlight-title">💡 Tip:</div>
+                        <div class="highlight-title">Tip</div>
                         <div>Use regenerations wisely! Try different workout splits or nutrition approaches to find what works best for you.</div>
                     </div>
                 </div>
@@ -580,11 +630,11 @@
 
         <!-- Exercise Library -->
         <section id="exercise-library" class="feature-section">
-            <h2 class="section-title">📚 Exercise Library</h2>
+            <h2 class="section-title">Exercise Library</h2>
             
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">🔍</div>
+                    <div class="card-icon">EX</div>
                     <h3 class="card-title">Browse Exercises</h3>
                 </div>
                 <div class="card-content">
@@ -635,7 +685,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">⭐</div>
+                    <div class="card-icon">FA</div>
                     <h3 class="card-title">Favorite Exercises</h3>
                 </div>
                 <div class="card-content">
@@ -646,11 +696,11 @@
 
         <!-- Progress Tracking -->
         <section id="progress" class="feature-section">
-            <h2 class="section-title">📈 Progress Tracking & Analytics</h2>
+            <h2 class="section-title">Progress Tracking & Analytics</h2>
             
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">📊</div>
+                    <div class="card-icon">DB</div>
                     <h3 class="card-title">Dashboard Overview</h3>
                 </div>
                 <div class="card-content">
@@ -691,7 +741,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">📜</div>
+                    <div class="card-icon">WH</div>
                     <h3 class="card-title">Workout History</h3>
                 </div>
                 <div class="card-content">
@@ -732,11 +782,11 @@
 
         <!-- HealthKit Integration -->
         <section id="healthkit" class="feature-section">
-            <h2 class="section-title">❤️ HealthKit Integration</h2>
+            <h2 class="section-title">HealthKit Integration</h2>
             
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">🔗</div>
+                    <div class="card-icon">HK</div>
                     <h3 class="card-title">Connect with Apple Health</h3>
                 </div>
                 <div class="card-content">
@@ -776,11 +826,11 @@
 
         <!-- Additional Features -->
         <section id="additional-features" class="feature-section">
-            <h2 class="section-title">✨ Additional Features</h2>
+            <h2 class="section-title">Additional Features</h2>
             
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">📱</div>
+                    <div class="card-icon">WD</div>
                     <h3 class="card-title">Widgets</h3>
                 </div>
                 <div class="card-content">
@@ -804,7 +854,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">☁️</div>
+                    <div class="card-icon">CK</div>
                     <h3 class="card-title">CloudKit Sync</h3>
                 </div>
                 <div class="card-content">
@@ -828,7 +878,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">📤</div>
+                    <div class="card-icon">DE</div>
                     <h3 class="card-title">Data Export</h3>
                 </div>
                 <div class="card-content">
@@ -852,7 +902,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">🔔</div>
+                    <div class="card-icon">NT</div>
                     <h3 class="card-title">Notifications</h3>
                 </div>
                 <div class="card-content">
@@ -881,11 +931,11 @@
 
         <!-- Troubleshooting -->
         <section id="troubleshooting" class="feature-section">
-            <h2 class="section-title">🔧 Troubleshooting</h2>
+            <h2 class="section-title">Troubleshooting</h2>
             
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">❓</div>
+                    <div class="card-icon">TS</div>
                     <h3 class="card-title">Common Issues & Solutions</h3>
                 </div>
                 <div class="card-content">
@@ -942,11 +992,11 @@
 
         <!-- Tips & Best Practices -->
         <section id="tips" class="feature-section">
-            <h2 class="section-title">💡 Tips & Best Practices</h2>
+            <h2 class="section-title">Tips & Best Practices</h2>
             
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">⭐</div>
+                    <div class="card-icon">TP</div>
                     <h3 class="card-title">Getting the Most Out of RepTrack Pro</h3>
                 </div>
                 <div class="card-content">
@@ -1010,3 +1060,4 @@
     </script>
 </body>
 </html>
+
