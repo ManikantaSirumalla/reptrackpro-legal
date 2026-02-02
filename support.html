@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RepTrack Pro - Support & Features Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* App Theme Colors */
+            --bg-primary: #000000;
+            --bg-secondary: #1e1e2e;
+            --bg-tertiary: #191923;
+            --card-bg-start: #2b2b2b;
+            --card-bg-end: #242424;
+            --text-primary: #ffffff;
+            --text-secondary: #999999;
+            --accent-primary: #007AFF;
+            --accent-secondary: #4DA6FF;
+            --success: #34C759;
+            --warning: #FFCC00;
+            --danger: #FF3B30;
+            --health: #7F66FF;
+            --progress: #CC9933;
+            
+            /* Spacing */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: var(--spacing-md);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: var(--spacing-xxl) var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-top: var(--spacing-md);
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: rgba(43, 43, 43, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            z-index: 100;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            justify-content: center;
+        }
+
+        .nav-item a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-item a:hover {
+            background: rgba(0, 122, 255, 0.2);
+            color: var(--accent-primary);
+        }
+
+        /* Card */
+        .card {
+            background: linear-gradient(135deg, var(--card-bg-start) 0%, var(--card-bg-end) 100%);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .card-content {
+            color: var(--text-secondary);
+        }
+
+        /* Feature Section */
+        .feature-section {
+            margin-bottom: var(--spacing-xxl);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid rgba(0, 122, 255, 0.3);
+        }
+
+        /* Steps */
+        .steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .step {
+            counter-increment: step-counter;
+            margin-bottom: var(--spacing-lg);
+            padding-left: var(--spacing-xl);
+            position: relative;
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.1rem;
+        }
+
+        .step-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: var(--spacing-sm);
+        }
+
+        .badge-new {
+            background: rgba(52, 199, 89, 0.2);
+            color: var(--success);
+            border: 1px solid rgba(52, 199, 89, 0.3);
+        }
+
+        .badge-ai {
+            background: rgba(127, 102, 255, 0.2);
+            color: var(--health);
+            border: 1px solid rgba(127, 102, 255, 0.3);
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .quick-link {
+            background: linear-gradient(135deg, var(--card-bg-start) 0%, var(--card-bg-end) 100%);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .quick-link:hover {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(77, 166, 255, 0.1) 100%);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        .quick-link-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .quick-link-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-xxl) var(--spacing-md);
+            margin-top: var(--spacing-xxl);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+        }
+
+        .footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: var(--spacing-md);
+            }
+
+            .nav-list {
+                flex-direction: column;
+            }
+        }
+
+        /* Highlight Box */
+        .highlight {
+            background: rgba(0, 122, 255, 0.1);
+            border-left: 4px solid var(--accent-primary);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            margin: var(--spacing-md) 0;
+        }
+
+        .highlight-title {
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>RepTrack Pro</h1>
+            <p>Your Ultimate Fitness Companion - Support & Features Guide</p>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#getting-started">Getting Started</a></li>
+                <li class="nav-item"><a href="#workout-tracking">Workout Tracking</a></li>
+                <li class="nav-item"><a href="#ai-plans">AI Plans</a></li>
+                <li class="nav-item"><a href="#exercise-library">Exercise Library</a></li>
+                <li class="nav-item"><a href="#progress">Progress Tracking</a></li>
+                <li class="nav-item"><a href="#healthkit">HealthKit</a></li>
+                <li class="nav-item"><a href="#troubleshooting">Troubleshooting</a></li>
+            </ul>
+        </nav>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <a href="#getting-started" class="quick-link">
+                <div class="quick-link-title">🚀 Getting Started</div>
+                <div class="quick-link-desc">New to RepTrack Pro? Start here</div>
+            </a>
+            <a href="#workout-tracking" class="quick-link">
+                <div class="quick-link-title">💪 Workout Tracking</div>
+                <div class="quick-link-desc">Track sets, reps, and weight</div>
+            </a>
+            <a href="#ai-plans" class="quick-link">
+                <div class="quick-link-title">🤖 AI Plans</div>
+                <div class="quick-link-desc">Generate personalized workouts</div>
+            </a>
+            <a href="#exercise-library" class="quick-link">
+                <div class="quick-link-title">📚 Exercise Library</div>
+                <div class="quick-link-desc">Browse exercises and techniques</div>
+            </a>
+        </div>
+
+        <!-- Getting Started -->
+        <section id="getting-started" class="feature-section">
+            <h2 class="section-title">🚀 Getting Started</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">👤</div>
+                    <h3 class="card-title">Create Your Profile</h3>
+                </div>
+                <div class="card-content">
+                    <ol class="steps">
+                        <li class="step">
+                            <div class="step-title">Launch the App</div>
+                            <div class="step-content">Open RepTrack Pro on your iPhone or iPad. If this is your first time, you'll see the welcome screen.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Set Up Your Profile</div>
+                            <div class="step-content">Tap "Get Started" and fill in your information:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>Your name and age</li>
+                                    <li>Height and weight</li>
+                                    <li>Fitness goal (strength, muscle building, weight loss, etc.)</li>
+                                    <li>Experience level (beginner, intermediate, advanced)</li>
+                                    <li>Available equipment</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Enable HealthKit</div>
+                            <div class="step-content">Allow RepTrack Pro to access your Apple Health data for comprehensive tracking and insights.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">You're Ready!</div>
+                            <div class="step-content">Start tracking your first workout or generate an AI-powered fitness plan.</div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workout Tracking -->
+        <section id="workout-tracking" class="feature-section">
+            <h2 class="section-title">💪 Workout Tracking</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🏋️</div>
+                    <h3 class="card-title">Start a Workout</h3>
+                </div>
+                <div class="card-content">
+                    <ol class="steps">
+                        <li class="step">
+                            <div class="step-title">Navigate to Workouts Tab</div>
+                            <div class="step-content">Tap the "Workouts" tab at the bottom of the screen.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Choose Your Workout</div>
+                            <div class="step-content">You can:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>Start a quick workout (add exercises on the fly)</li>
+                                    <li>Use a workout template (Push/Pull/Legs, Full Body, etc.)</li>
+                                    <li>Start from an AI-generated plan</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Add Exercises</div>
+                            <div class="step-content">Tap "Add Exercise" to browse the exercise library or search for specific exercises. Select the exercises you want to perform.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Track Your Sets</div>
+                            <div class="step-content">For each exercise:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>Enter the weight used</li>
+                                    <li>Enter the number of reps completed</li>
+                                    <li>Tap the checkmark to complete the set</li>
+                                    <li>The rest timer will automatically start</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Rest Timer</div>
+                            <div class="step-content">After completing a set, a rest timer will start automatically. You can customize rest times in your workout settings. The timer will notify you when rest is complete.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Complete Your Workout</div>
+                            <div class="step-content">When finished, tap "End Workout" to save. Your workout will be automatically saved to your history with all statistics calculated.</div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⏱️</div>
+                    <h3 class="card-title">Rest Timer Features</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="steps" style="list-style: none;">
+                        <li class="step">
+                            <div class="step-title">Automatic Timer</div>
+                            <div class="step-content">The rest timer starts automatically after completing each set. Default rest time is 90 seconds, but you can customize this per exercise.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Custom Rest Times</div>
+                            <div class="step-content">When creating a workout template or AI plan, you can set custom rest times for each exercise based on your training style.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Notifications</div>
+                            <div class="step-content">You'll receive a notification when your rest period is complete, so you can focus on recovery without watching the timer.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <h3 class="card-title">Live Activities <span class="badge badge-new">iOS 16+</span></h3>
+                </div>
+                <div class="card-content">
+                    <p style="margin-bottom: var(--spacing-md);">On iPhone 14 Pro and later, your active workout appears on the Lock Screen and Dynamic Island for quick access without opening the app.</p>
+                    <div class="highlight">
+                        <div class="highlight-title">How to Use:</div>
+                        <div>Simply start a workout and it will automatically appear on your Lock Screen. Swipe to see your current exercise, sets completed, and rest timer.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Plans -->
+        <section id="ai-plans" class="feature-section">
+            <h2 class="section-title">🤖 AI-Powered Fitness Plans <span class="badge badge-ai">AI</span></h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Generate Your First Plan</h3>
+                </div>
+                <div class="card-content">
+                    <ol class="steps">
+                        <li class="step">
+                            <div class="step-title">Go to Plans Tab</div>
+                            <div class="step-content">Tap the "Plans" tab at the bottom of the screen.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Start Plan Creation</div>
+                            <div class="step-content">Tap "Create Your First Plan" to begin the guided setup process.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Choose Your Goal</div>
+                            <div class="step-content">Select your primary fitness goal:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>Strength Building</li>
+                                    <li>Muscle Building</li>
+                                    <li>Weight Loss</li>
+                                    <li>Endurance & Cardio</li>
+                                    <li>Athletic Performance</li>
+                                    <li>General Fitness</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Set Your Preferences</div>
+                            <div class="step-content">Configure your plan:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li><strong>Difficulty Level:</strong> Beginner, Intermediate, or Advanced</li>
+                                    <li><strong>Focus Areas:</strong> Select muscle groups you want to target</li>
+                                    <li><strong>Equipment:</strong> Choose what equipment you have available</li>
+                                    <li><strong>Workout Duration:</strong> How long you want each workout to be</li>
+                                    <li><strong>Workouts Per Week:</strong> Your training frequency</li>
+                                    <li><strong>Diet Preferences:</strong> Vegetarian, Vegan, Keto, etc.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Review & Generate</div>
+                            <div class="step-content">Review your selections and tap "Generate Plan". The AI will create a personalized workout and nutrition plan tailored to your goals.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Start Your Plan</div>
+                            <div class="step-content">Once generated, you can view your weekly schedule, workout details, and nutrition plan. Tap "Start Workout" to begin your first session.</div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔄</div>
+                    <h3 class="card-title">Regenerating Plans</h3>
+                </div>
+                <div class="card-content">
+                    <p style="margin-bottom: var(--spacing-md);">You can regenerate parts of your plan if you want to try different workouts or nutrition options.</p>
+                    <ol class="steps">
+                        <li class="step">
+                            <div class="step-title">Access Plan Options</div>
+                            <div class="step-content">In the Plans tab, tap the three-dot menu (⋯) on your active plan.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Choose What to Regenerate</div>
+                            <div class="step-content">You can regenerate:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>Workout Plan only</li>
+                                    <li>Nutrition Plan only</li>
+                                    <li>Full Plan (both workouts and nutrition)</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Regeneration Limits</div>
+                            <div class="step-content">Each plan comes with 3 total regenerations (any combination). This allows you to explore different options while maintaining plan quality.</div>
+                        </li>
+                    </ol>
+                    <div class="highlight" style="margin-top: var(--spacing-md);">
+                        <div class="highlight-title">💡 Tip:</div>
+                        <div>Use regenerations wisely! Try different workout splits or nutrition approaches to find what works best for you.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercise Library -->
+        <section id="exercise-library" class="feature-section">
+            <h2 class="section-title">📚 Exercise Library</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔍</div>
+                    <h3 class="card-title">Browse Exercises</h3>
+                </div>
+                <div class="card-content">
+                    <ol class="steps">
+                        <li class="step">
+                            <div class="step-title">Open Exercise Library</div>
+                            <div class="step-content">Go to the "Workouts" tab and tap "Library" or "Browse Exercises".</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Browse by Category</div>
+                            <div class="step-content">View exercises organized by category (Strength, Cardio, Flexibility, etc.) or browse by muscle group.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Browse by Muscle Group</div>
+                            <div class="step-content">Tap "Browse by Muscle Group" to see exercises organized by target muscles:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>Chest, Back, Shoulders</li>
+                                    <li>Arms (Biceps, Triceps, Forearms)</li>
+                                    <li>Legs (Quadriceps, Hamstrings, Glutes, Calves)</li>
+                                    <li>Core (Abs, Obliques, Lower Back)</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Search Exercises</div>
+                            <div class="step-content">Use the search bar to quickly find specific exercises by name.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">View Exercise Details</div>
+                            <div class="step-content">Tap any exercise to see:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>Video demonstrations</li>
+                                    <li>Step-by-step instructions</li>
+                                    <li>Pro tips for proper form</li>
+                                    <li>Common mistakes to avoid</li>
+                                    <li>Exercise variations</li>
+                                    <li>Target muscles and equipment needed</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Add to Workout</div>
+                            <div class="step-content">Tap "Add to Workout" to include the exercise in your current or next workout session.</div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⭐</div>
+                    <h3 class="card-title">Favorite Exercises</h3>
+                </div>
+                <div class="card-content">
+                    <p>Mark exercises as favorites for quick access. Your favorite exercises will appear at the top of your exercise library for easy selection during workout creation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Tracking -->
+        <section id="progress" class="feature-section">
+            <h2 class="section-title">📈 Progress Tracking & Analytics</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <h3 class="card-title">Dashboard Overview</h3>
+                </div>
+                <div class="card-content">
+                    <p style="margin-bottom: var(--spacing-md);">The Dashboard is your command center, showing your fitness progress at a glance:</p>
+                    <ul class="steps" style="list-style: none;">
+                        <li class="step">
+                            <div class="step-title">Weekly Summary</div>
+                            <div class="step-content">View your weekly progress with interactive charts showing:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li><strong>Activity:</strong> Number of workouts completed</li>
+                                    <li><strong>Volume:</strong> Total weight lifted</li>
+                                    <li><strong>Time:</strong> Total workout duration</li>
+                                    <li><strong>Calories:</strong> Calories burned (from HealthKit)</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Muscle Group Focus</div>
+                            <div class="step-content">See which muscle groups you've trained most with an interactive pie chart. Tap any muscle group to see detailed statistics.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Personal Records</div>
+                            <div class="step-content">Track your best performances:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>Heaviest weight lifted</li>
+                                    <li>Most reps completed</li>
+                                    <li>Highest volume achieved</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Streak Tracking</div>
+                            <div class="step-content">Maintain consistency with streak tracking. See your current streak and longest streak to stay motivated.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📜</div>
+                    <h3 class="card-title">Workout History</h3>
+                </div>
+                <div class="card-content">
+                    <ol class="steps">
+                        <li class="step">
+                            <div class="step-title">View History</div>
+                            <div class="step-content">Go to the "History" tab to see all your past workouts organized by date.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Workout Details</div>
+                            <div class="step-content">Tap any workout to see comprehensive details:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>All exercises and sets performed</li>
+                                    <li>Muscle group distribution</li>
+                                    <li>Performance analysis compared to previous workouts</li>
+                                    <li>Personal records achieved</li>
+                                    <li>Workout quality score</li>
+                                    <li>Key insights and recommendations</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Performance Analysis</div>
+                            <div class="step-content">Each workout includes detailed analytics:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li><strong>Comparison:</strong> See how this workout compares to your previous session</li>
+                                    <li><strong>Progress Trends:</strong> Track volume and strength progression over time</li>
+                                    <li><strong>Personal Records:</strong> Automatically detects when you set new PRs</li>
+                                    <li><strong>Workout Quality Score:</strong> Get a score based on volume, intensity, and consistency</li>
+                                    <li><strong>Insights:</strong> AI-powered recommendations for improvement</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- HealthKit Integration -->
+        <section id="healthkit" class="feature-section">
+            <h2 class="section-title">❤️ HealthKit Integration</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔗</div>
+                    <h3 class="card-title">Connect with Apple Health</h3>
+                </div>
+                <div class="card-content">
+                    <ol class="steps">
+                        <li class="step">
+                            <div class="step-title">Enable HealthKit</div>
+                            <div class="step-content">When prompted, allow RepTrack Pro to read and write health data. This enables comprehensive tracking.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Automatic Sync</div>
+                            <div class="step-content">Your workouts are automatically synced to Apple Health, including:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>Workout duration and type</li>
+                                    <li>Active energy (calories burned)</li>
+                                    <li>Exercise minutes</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Read Health Data</div>
+                            <div class="step-content">RepTrack Pro can read data from Apple Health to provide insights:
+                                <ul style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                    <li>Recovery scores based on sleep and heart rate</li>
+                                    <li>Calories burned from other activities</li>
+                                    <li>Resting heart rate and HRV for recovery analysis</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Manage Permissions</div>
+                            <div class="step-content">You can manage HealthKit permissions anytime in Settings → Privacy & Security → Health → RepTrack Pro.</div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Features -->
+        <section id="additional-features" class="feature-section">
+            <h2 class="section-title">✨ Additional Features</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📱</div>
+                    <h3 class="card-title">Widgets</h3>
+                </div>
+                <div class="card-content">
+                    <p style="margin-bottom: var(--spacing-md);">Add RepTrack Pro widgets to your Home Screen for quick access:</p>
+                    <ol class="steps">
+                        <li class="step">
+                            <div class="step-title">Add Widget</div>
+                            <div class="step-content">Long press on your Home Screen, tap the "+" button, and search for "RepTrack Pro".</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Choose Widget Size</div>
+                            <div class="step-content">Select from available widget sizes (Small, Medium, Large) and choose what information to display.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Quick Access</div>
+                            <div class="step-content">Widgets show your next scheduled workout, recent activity, or current streak for quick reference.</div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">☁️</div>
+                    <h3 class="card-title">CloudKit Sync</h3>
+                </div>
+                <div class="card-content">
+                    <p style="margin-bottom: var(--spacing-md);">Your workout data is automatically synced across all your Apple devices using iCloud:</p>
+                    <ul class="steps" style="list-style: none;">
+                        <li class="step">
+                            <div class="step-title">Automatic Backup</div>
+                            <div class="step-content">All your workouts, plans, and progress are automatically backed up to iCloud.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Multi-Device Access</div>
+                            <div class="step-content">Access your data on iPhone, iPad, and Mac (when available) seamlessly.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Privacy First</div>
+                            <div class="step-content">Your data is encrypted and stored securely in your personal iCloud account.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📤</div>
+                    <h3 class="card-title">Data Export</h3>
+                </div>
+                <div class="card-content">
+                    <p style="margin-bottom: var(--spacing-md);">Export your workout data for backup or analysis:</p>
+                    <ol class="steps">
+                        <li class="step">
+                            <div class="step-title">Go to Settings</div>
+                            <div class="step-content">Navigate to Settings → Data Management → Export Data.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Choose Format</div>
+                            <div class="step-content">Select PDF or CSV format for your export.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Export</div>
+                            <div class="step-content">Your complete workout history will be exported and can be shared or saved.</div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔔</div>
+                    <h3 class="card-title">Notifications</h3>
+                </div>
+                <div class="card-content">
+                    <p style="margin-bottom: var(--spacing-md);">Stay on track with smart notifications:</p>
+                    <ul class="steps" style="list-style: none;">
+                        <li class="step">
+                            <div class="step-title">Workout Reminders</div>
+                            <div class="step-content">Get notified when it's time for your scheduled workout.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Rest Timer Alerts</div>
+                            <div class="step-content">Receive notifications when your rest period is complete.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Streak Reminders</div>
+                            <div class="step-content">Get gentle reminders to maintain your workout streak.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Customize Notifications</div>
+                            <div class="step-content">Manage all notification preferences in Settings → Notifications.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section id="troubleshooting" class="feature-section">
+            <h2 class="section-title">🔧 Troubleshooting</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">❓</div>
+                    <h3 class="card-title">Common Issues & Solutions</h3>
+                </div>
+                <div class="card-content">
+                    <div style="margin-bottom: var(--spacing-lg);">
+                        <h4 style="color: var(--text-primary); margin-bottom: var(--spacing-sm); font-weight: 600;">HealthKit Not Syncing</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                            <strong>Solution:</strong> Go to Settings → Privacy & Security → Health → RepTrack Pro and ensure all permissions are enabled. Make sure you've granted both "Read" and "Write" permissions.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: var(--spacing-lg);">
+                        <h4 style="color: var(--text-primary); margin-bottom: var(--spacing-sm); font-weight: 600;">Workouts Not Appearing</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                            <strong>Solution:</strong> Make sure you've tapped "End Workout" to save your session. If workouts still don't appear, try pulling down to refresh on the History tab.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: var(--spacing-lg);">
+                        <h4 style="color: var(--text-primary); margin-bottom: var(--spacing-sm); font-weight: 600;">AI Plan Generation Failing</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                            <strong>Solution:</strong> Check your internet connection. AI plan generation requires an active internet connection. If the issue persists, try regenerating the plan or contact support.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: var(--spacing-lg);">
+                        <h4 style="color: var(--text-primary); margin-bottom: var(--spacing-sm); font-weight: 600;">CloudKit Sync Issues</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                            <strong>Solution:</strong> Ensure you're signed in to iCloud on your device. Go to Settings → [Your Name] → iCloud and make sure iCloud Drive is enabled. Also check that RepTrack Pro has iCloud permissions enabled.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: var(--spacing-lg);">
+                        <h4 style="color: var(--text-primary); margin-bottom: var(--spacing-sm); font-weight: 600;">Widget Not Updating</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                            <strong>Solution:</strong> Widgets update periodically. If your widget seems outdated, try removing and re-adding it to your Home Screen. Widgets typically update within a few minutes of completing a workout.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: var(--spacing-lg);">
+                        <h4 style="color: var(--text-primary); margin-bottom: var(--spacing-sm); font-weight: 600;">App Crashes or Freezes</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                            <strong>Solution:</strong> 
+                            <ol style="margin-top: 8px; margin-left: 20px; color: var(--text-secondary);">
+                                <li>Force close the app and reopen it</li>
+                                <li>Restart your device</li>
+                                <li>Ensure you're running the latest version of iOS</li>
+                                <li>If the issue persists, contact support with details about when the crash occurs</li>
+                            </ol>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips & Best Practices -->
+        <section id="tips" class="feature-section">
+            <h2 class="section-title">💡 Tips & Best Practices</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⭐</div>
+                    <h3 class="card-title">Getting the Most Out of RepTrack Pro</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="steps" style="list-style: none;">
+                        <li class="step">
+                            <div class="step-title">Be Consistent</div>
+                            <div class="step-content">Track every workout, even if it's a light session. Consistency in logging helps the app provide better insights and recommendations.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Use Accurate Data</div>
+                            <div class="step-content">Enter accurate weights and reps. This ensures your progress tracking and personal records are meaningful and motivating.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Review Your Progress</div>
+                            <div class="step-content">Regularly check your workout history and analytics. The performance analysis feature helps you identify what's working and what needs adjustment.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Explore the Exercise Library</div>
+                            <div class="step-content">Don't stick to the same exercises. Browse the library to discover new movements and keep your workouts fresh and engaging.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Use AI Plans Strategically</div>
+                            <div class="step-content">AI-generated plans are great for structure, but feel free to modify them based on how your body responds. Use regenerations wisely to find the perfect plan for you.</div>
+                        </li>
+                        <li class="step">
+                            <div class="step-title">Enable All Integrations</div>
+                            <div class="step-content">Connect HealthKit and enable CloudKit sync for the most comprehensive tracking experience and data backup.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>RepTrack Pro</strong> - Your Ultimate Fitness Companion</p>
+            <p style="margin-top: var(--spacing-md);">
+                <a href="https://manikantasirumalla.github.io/reptrackpro-legal/privacy.html">Privacy Policy</a> | 
+                <a href="https://manikantasirumalla.github.io/reptrackpro-legal/terms.html">Terms of Service</a>
+            </p>
+            <p style="margin-top: var(--spacing-sm); color: var(--text-secondary); font-size: 0.9rem;">
+                Need more help? Contact us through the app's Settings → Help & Support
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
