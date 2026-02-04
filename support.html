@@ -30,6 +30,7 @@
             --accent-emerald: #10b981;
             --accent-amber: #f59e0b;
             --accent-rose: #f43f5e;
+            --accent-cyan: #06b6d4;
             --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
             --gradient-surface: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
             --radius-sm: 6px;
@@ -75,7 +76,7 @@
         /* Header */
         .header {
             position: relative;
-            padding: 120px 0 80px;
+            padding: 80px 0 80px;
             text-align: center;
             overflow: hidden;
         }
@@ -92,32 +93,348 @@
             pointer-events: none;
         }
 
+        /* Hero Animation Container */
+        .hero-animation-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto 24px;
+        }
+
+        /* Fitness Icons Ring */
+        .fitness-icons-ring {
+            position: absolute;
+            inset: 0;
+            animation: rotateRing 6s ease-in-out forwards;
+        }
+
+        @keyframes rotateRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(1080deg); } /* 3 full rotations */
+        }
+
+        .fitness-icon-wrapper {
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            left: 50%;
+            top: 50%;
+            margin-left: -32px;
+            margin-top: -32px;
+            --angle: calc(var(--i) * 72deg);
+            transform: rotate(var(--angle)) translateY(-130px);
+            animation: 
+                iconOrbit 6s ease-in-out forwards,
+                iconConverge 1.2s ease-in-out 6s forwards;
+        }
+
+        @keyframes iconOrbit {
+            0%, 100% {
+                transform: rotate(var(--angle)) translateY(-130px) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes iconConverge {
+            0% {
+                transform: rotate(var(--angle)) translateY(-130px) scale(1);
+                opacity: 1;
+            }
+            60% {
+                transform: rotate(var(--angle)) translateY(0px) scale(0.6);
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(var(--angle)) translateY(0px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .fitness-icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-md);
+            padding: 8px;
+            transform: rotate(calc(var(--i) * -72deg));
+            animation: counterRotate 6s ease-in-out forwards;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes counterRotate {
+            0% { transform: rotate(calc(var(--i) * -72deg)); }
+            100% { transform: rotate(calc(var(--i) * -72deg - 1080deg)); }
+        }
+
+        .fitness-icon svg {
+            width: 28px;
+            height: 28px;
+            margin-bottom: 4px;
+        }
+
+        .icon-label {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            opacity: 0.8;
+        }
+
+        /* Icon Colors */
+        .fitness-icon.running {
+            color: var(--accent-blue-light);
+            border-color: rgba(59, 130, 246, 0.3);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, var(--bg-elevated) 100%);
+        }
+
+        .fitness-icon.squat {
+            color: var(--accent-emerald);
+            border-color: rgba(16, 185, 129, 0.3);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, var(--bg-elevated) 100%);
+        }
+
+        .fitness-icon.yoga {
+            color: var(--accent-purple);
+            border-color: rgba(139, 92, 246, 0.3);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, var(--bg-elevated) 100%);
+        }
+
+        .fitness-icon.hiit {
+            color: var(--accent-rose);
+            border-color: rgba(244, 63, 94, 0.3);
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.1) 0%, var(--bg-elevated) 100%);
+        }
+
+        .fitness-icon.calisthenics {
+            color: var(--accent-amber);
+            border-color: rgba(245, 158, 11, 0.3);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, var(--bg-elevated) 100%);
+        }
+
+        /* Center Logo */
+        .logo-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        /* Logo starts small and hidden, reveals after icons converge */
         .logo-wrapper {
+            position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 88px;
-            height: 88px;
+            width: 100px;
+            height: 100px;
             background: var(--gradient-primary);
-            border-radius: 22px;
-            margin-bottom: 32px;
-            box-shadow: var(--shadow-glow), var(--shadow-lg);
-            animation: float 6s ease-in-out infinite;
-            position: relative;
+            border-radius: 24px;
+            box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+            overflow: hidden;
+            transform: scale(0.3);
+            opacity: 0;
+            animation: logoReveal 1s cubic-bezier(0.34, 1.56, 0.64, 1) 6.8s forwards;
+        }
+
+        @keyframes logoReveal {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+                box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                box-shadow: var(--shadow-glow), var(--shadow-lg), 0 0 60px rgba(139, 92, 246, 0.3);
+            }
         }
 
         .logo-wrapper::after {
             content: '';
             position: absolute;
-            inset: -1px;
-            border-radius: 23px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+            inset: 0;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 50%);
             pointer-events: none;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        /* Burst effect when icons converge */
+        .logo-burst {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(59, 130, 246, 0.2) 40%, transparent 70%);
+            opacity: 0;
+            animation: burstEffect 0.8s ease-out 6.6s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes burstEffect {
+            0% {
+                transform: translate(-50%, -50%) scale(0.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Particle effects on convergence */
+        .convergence-particles {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleBurst 1s ease-out 6.5s forwards;
+        }
+
+        .particle:nth-child(1) { --px: -80px; --py: -60px; background: var(--accent-blue-light); animation-delay: 6.5s; }
+        .particle:nth-child(2) { --px: 70px; --py: -70px; background: var(--accent-emerald); animation-delay: 6.55s; }
+        .particle:nth-child(3) { --px: 90px; --py: 40px; background: var(--accent-purple); animation-delay: 6.6s; }
+        .particle:nth-child(4) { --px: -60px; --py: 80px; background: var(--accent-rose); animation-delay: 6.65s; }
+        .particle:nth-child(5) { --px: 20px; --py: -90px; background: var(--accent-amber); animation-delay: 6.7s; }
+        .particle:nth-child(6) { --px: -90px; --py: 20px; background: var(--accent-blue-light); animation-delay: 6.75s; }
+        .particle:nth-child(7) { --px: 50px; --py: 85px; background: var(--accent-purple); animation-delay: 6.8s; }
+        .particle:nth-child(8) { --px: -40px; --py: -85px; background: var(--accent-emerald); animation-delay: 6.85s; }
+
+        @keyframes particleBurst {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(calc(-50% + var(--px)), calc(-50% + var(--py))) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Pulse rings after reveal */
+        .logo-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 28px;
+            border: 2px solid rgba(139, 92, 246, 0.4);
+            background: transparent;
+            opacity: 0;
+            animation: logoPulseReveal 2s ease-out 7.5s infinite;
+        }
+
+        .logo-pulse.delay {
+            animation-delay: 8.5s;
+        }
+
+        @keyframes logoPulseReveal {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.8);
+                opacity: 0;
+            }
+        }
+
+        /* Connection Lines SVG */
+        .connection-lines {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            animation: linesDisappear 0.5s ease-out 6s forwards;
+        }
+
+        @keyframes linesDisappear {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .orbit-line {
+            stroke-dasharray: 8 4;
+            animation: orbitDash 3s linear infinite;
+        }
+
+        .orbit-line.inner {
+            stroke-dasharray: 4 8;
+            animation-direction: reverse;
+            animation-duration: 2s;
+        }
+
+        @keyframes orbitDash {
+            from { stroke-dashoffset: 0; }
+            to { stroke-dashoffset: 100; }
+        }
+
+        /* Tagline */
+        .tagline-container {
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: taglineReveal 0.6s ease-out 7.8s forwards;
+        }
+
+        @keyframes taglineReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tagline-text {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--accent-purple);
+            letter-spacing: 0.3px;
+        }
+
+        /* Floating animation after reveal */
+        .logo-wrapper.revealed {
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.02); }
         }
 
         .logo-text {
@@ -125,6 +442,18 @@
             font-weight: 800;
             color: white;
             letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
         }
 
         .header h1 {
@@ -633,6 +962,7 @@
             font-weight: 800;
             font-size: 14px;
             color: white;
+            overflow: hidden;
         }
 
         .footer-logo-text {
@@ -707,25 +1037,66 @@
             animation: fadeInUp 0.5s ease forwards;
         }
 
-        .delay-1 { animation-delay: 0.1s; opacity: 0; }
-        .delay-2 { animation-delay: 0.2s; opacity: 0; }
-        .delay-3 { animation-delay: 0.3s; opacity: 0; }
-        .delay-4 { animation-delay: 0.4s; opacity: 0; }
-
         /* Responsive */
         @media (max-width: 768px) {
             .header {
-                padding: 80px 0 60px;
+                padding: 60px 0 60px;
+            }
+
+            .hero-animation-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .fitness-icon-wrapper {
+                width: 52px;
+                height: 52px;
+                margin-left: -26px;
+                margin-top: -26px;
+                transform: rotate(var(--angle)) translateY(-110px);
+            }
+
+            @keyframes iconOrbit {
+                0%, 100% {
+                    transform: rotate(var(--angle)) translateY(-110px) scale(1);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes iconConverge {
+                0% {
+                    transform: rotate(var(--angle)) translateY(-110px) scale(1);
+                    opacity: 1;
+                }
+                60% {
+                    transform: rotate(var(--angle)) translateY(0px) scale(0.6);
+                    opacity: 1;
+                }
+                100% {
+                    transform: rotate(var(--angle)) translateY(0px) scale(0);
+                    opacity: 0;
+                }
+            }
+
+            .fitness-icon svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .icon-label {
+                font-size: 8px;
             }
 
             .logo-wrapper {
-                width: 72px;
-                height: 72px;
-                border-radius: 18px;
+                width: 80px;
+                height: 80px;
+                border-radius: 20px;
             }
 
-            .logo-text {
-                font-size: 26px;
+            .logo-pulse {
+                width: 100px;
+                height: 100px;
+                border-radius: 24px;
             }
 
             .section {
@@ -748,19 +1119,174 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 480px) {
+            .hero-animation-container {
+                width: 240px;
+                height: 240px;
+            }
+
+            .fitness-icon-wrapper {
+                width: 44px;
+                height: 44px;
+                margin-left: -22px;
+                margin-top: -22px;
+                transform: rotate(var(--angle)) translateY(-90px);
+            }
+
+            @keyframes iconOrbit {
+                0%, 100% {
+                    transform: rotate(var(--angle)) translateY(-90px) scale(1);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes iconConverge {
+                0% {
+                    transform: rotate(var(--angle)) translateY(-90px) scale(1);
+                    opacity: 1;
+                }
+                60% {
+                    transform: rotate(var(--angle)) translateY(0px) scale(0.5);
+                    opacity: 1;
+                }
+                100% {
+                    transform: rotate(var(--angle)) translateY(0px) scale(0);
+                    opacity: 0;
+                }
+            }
+
+            .fitness-icon svg {
+                width: 18px;
+                height: 18px;
+                margin-bottom: 2px;
+            }
+
+            .icon-label {
+                font-size: 7px;
+            }
+
+            .logo-wrapper {
+                width: 64px;
+                height: 64px;
+                border-radius: 16px;
+            }
+
+            .logo-pulse {
+                width: 80px;
+                height: 80px;
+                border-radius: 20px;
+            }
+
+            .logo-burst {
+                width: 150px;
+                height: 150px;
+            }
+
+            .particle {
+                width: 6px;
+                height: 6px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="logo-wrapper animate-in">
-                <span class="logo-text">RP</span>
+            <!-- Animated Fitness Icons Background -->
+            <div class="hero-animation-container">
+                <div class="fitness-icons-ring">
+                    <!-- Running -->
+                    <div class="fitness-icon-wrapper" style="--i: 0;">
+                        <div class="fitness-icon running">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/>
+                            </svg>
+                            <span class="icon-label">Running</span>
+                        </div>
+                    </div>
+                    <!-- Squat -->
+                    <div class="fitness-icon-wrapper" style="--i: 1;">
+                        <div class="fitness-icon squat">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3 18v-5H7v-6c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6h-2v5h-2v-5h-2v5H9z"/>
+                            </svg>
+                            <span class="icon-label">Strength</span>
+                        </div>
+                    </div>
+                    <!-- Yoga -->
+                    <div class="fitness-icon-wrapper" style="--i: 2;">
+                        <div class="fitness-icon yoga">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-1 16.5v-5.5H9V9c0-.6.4-1 1-1h4c.6 0 1 .4 1 1v6h-2v5.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5zM6 9.5C6 7.6 7.6 6 9.5 6h.5V4h-.5C6.5 4 4 6.5 4 9.5c0 1.6.7 3 1.7 4L4 18h2.3l1.4-3.6c-.7-.6-1.2-1.3-1.5-2.2-.1-.5-.2-1.1-.2-1.7zm12 0c0 .6-.1 1.2-.2 1.7-.3.9-.8 1.6-1.5 2.2L17.7 18H20l-1.7-4.5c1-.9 1.7-2.4 1.7-4 0-3-2.5-5.5-5.5-5.5H14v2h.5c1.9 0 3.5 1.6 3.5 3.5z"/>
+                            </svg>
+                            <span class="icon-label">Yoga</span>
+                        </div>
+                    </div>
+                    <!-- HIIT -->
+                    <div class="fitness-icon-wrapper" style="--i: 3;">
+                        <div class="fitness-icon hiit">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 1.76-.57 3.39-1.53 4.72l1.42 1.42A9.996 9.996 0 0022 12c0-5.18-3.95-9.45-9-9.95zM12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8c.76 0 1.49-.11 2.19-.3l-1.49-1.49C12.47 18.41 12.24 18.5 12 18.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5c1.93 0 3.66.84 4.85 2.18l1.44-1.44A7.96 7.96 0 0012 4zM11 7v6l5.25 3.15.75-1.23-4.5-2.67V7H11z"/>
+                            </svg>
+                            <span class="icon-label">HIIT</span>
+                        </div>
+                    </div>
+                    <!-- Calisthenics -->
+                    <div class="fitness-icon-wrapper" style="--i: 4;">
+                        <div class="fitness-icon calisthenics">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/>
+                            </svg>
+                            <span class="icon-label">Calisthenics</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Center Logo -->
+                <div class="logo-center">
+                    <div class="logo-burst"></div>
+                    <div class="convergence-particles">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                    <div class="logo-pulse"></div>
+                    <div class="logo-pulse delay"></div>
+                    <div class="logo-wrapper" id="mainLogo">
+                        <img src="logo.png" alt="RepTrack Pro Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <span class="logo-text" style="display:none;">RP</span>
+                    </div>
+                </div>
+                
+                <!-- Connecting Lines -->
+                <svg class="connection-lines" viewBox="0 0 400 400">
+                    <defs>
+                        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0"/>
+                            <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:0.6"/>
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="200" cy="200" r="120" fill="none" stroke="url(#lineGradient)" stroke-width="1" class="orbit-line"/>
+                    <circle cx="200" cy="200" r="80" fill="none" stroke="url(#lineGradient)" stroke-width="0.5" class="orbit-line inner"/>
+                </svg>
             </div>
-            <h1 class="animate-in delay-1">Support Center</h1>
-            <p class="header-subtitle animate-in delay-2">Everything you need to master RepTrack Pro and achieve your fitness goals</p>
             
-            <div class="search-container animate-in delay-3">
+            <div class="tagline-container">
+                <span class="tagline-text">All Your Fitness. One App.</span>
+            </div>
+            
+            <h1 class="animate-in" style="animation-delay: 7.9s; opacity: 0;">Support Center</h1>
+            <p class="header-subtitle animate-in" style="animation-delay: 8.1s; opacity: 0;">Everything you need to master RepTrack Pro and achieve your fitness goals</p>
+            
+            <div class="search-container animate-in" style="animation-delay: 8.3s; opacity: 0;">
                 <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg>
@@ -786,7 +1312,7 @@
     <main class="container">
         <!-- Quick Links -->
         <div class="quick-links">
-            <a href="#getting-started" class="quick-link animate-in delay-1">
+            <a href="#getting-started" class="quick-link animate-in" style="animation-delay: 8.5s; opacity: 0;">
                 <div class="quick-link-icon blue">
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -795,7 +1321,7 @@
                 <span class="quick-link-title">Getting Started</span>
                 <span class="quick-link-desc">New to RepTrack Pro? Start here</span>
             </a>
-            <a href="#workout-tracking" class="quick-link animate-in delay-2">
+            <a href="#workout-tracking" class="quick-link animate-in" style="animation-delay: 8.6s; opacity: 0;">
                 <div class="quick-link-icon emerald">
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
@@ -804,7 +1330,7 @@
                 <span class="quick-link-title">Workout Tracking</span>
                 <span class="quick-link-desc">Track sets, reps, and weight</span>
             </a>
-            <a href="#ai-plans" class="quick-link animate-in delay-3">
+            <a href="#ai-plans" class="quick-link animate-in" style="animation-delay: 8.7s; opacity: 0;">
                 <div class="quick-link-icon purple">
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
@@ -813,7 +1339,7 @@
                 <span class="quick-link-title">AI Plans</span>
                 <span class="quick-link-desc">Generate personalized workouts</span>
             </a>
-            <a href="#exercise-library" class="quick-link animate-in delay-4">
+            <a href="#exercise-library" class="quick-link animate-in" style="animation-delay: 8.8s; opacity: 0;">
                 <div class="quick-link-icon amber">
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
@@ -1530,7 +2056,9 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-logo">
-                <div class="footer-logo-icon">RP</div>
+                <div class="footer-logo-icon">
+                    <img src="logo.png" alt="RepTrack Pro" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none'; this.parentElement.innerHTML='RP';">
+                </div>
                 <span class="footer-logo-text">RepTrack Pro</span>
             </div>
             <p class="footer-tagline">Your Ultimate Fitness Companion</p>
@@ -1543,6 +2071,17 @@
     </footer>
 
     <script>
+        // Add floating animation after logo reveal completes
+        setTimeout(() => {
+            const logo = document.getElementById('mainLogo');
+            if (logo) {
+                logo.style.animation = 'logoFloat 4s ease-in-out infinite';
+                logo.style.opacity = '1';
+                logo.style.transform = 'scale(1)';
+                logo.style.boxShadow = 'var(--shadow-glow), var(--shadow-lg), 0 0 60px rgba(139, 92, 246, 0.3)';
+            }
+        }, 8000); // After reveal animation completes
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
